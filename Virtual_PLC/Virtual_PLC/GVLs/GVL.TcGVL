@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <GVL Name="GVL" Id="{283fb4ab-a692-42a4-99f7-db60d092ad03}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+
+    (* Coffee process *)
+    CoffeeDone : BOOL;
+	HeatingUp : BOOL;
+	ix_Start : BOOL;
+	WakeUp : BOOL;
+	CoffeeState : INT;
+	GrindButton : BOOL;
+
+    (* Breakfast process *)
+	InsertedButton : BOOL;
+	LeverButton : BOOL;
+	ToastState : INT;
+
+    (* Status signals *)
+    BreakfastReady : BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -21,9 +21,9 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[GetOffBed := FALSE;
-CASE step OF
+      <ST><![CDATA[CASE step OF
 	0 : // Idle
+		GetOffBed := FALSE;	
 		IF GetOffBed = TRUE AND Start THEN
 			step := 10;
 		END_IF
@@ -50,12 +50,13 @@ CASE step OF
 		IF ToastState = 2 THEN
 			Brewing := TRUE;
 			CoffeeMakingState := 3;
+			Making_Coffee := TRUE;
 		END_IF
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="Making_Coffee">
-      <LineId Id="7" Count="0" />
       <LineId Id="9" Count="1" />
+      <LineId Id="140" Count="0" />
       <LineId Id="13" Count="2" />
       <LineId Id="69" Count="2" />
       <LineId Id="92" Count="0" />
@@ -76,6 +77,7 @@ END_CASE]]></ST>
       <LineId Id="99" Count="1" />
       <LineId Id="118" Count="0" />
       <LineId Id="121" Count="0" />
+      <LineId Id="141" Count="0" />
       <LineId Id="119" Count="0" />
       <LineId Id="11" Count="0" />
     </LineIds>

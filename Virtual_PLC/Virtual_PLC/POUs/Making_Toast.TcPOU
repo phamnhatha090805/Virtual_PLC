@@ -37,6 +37,7 @@ END_VAR]]></Declaration>
 		IF TimerON.Q THEN
 			MakingToastState := 2;
 			TimerON(IN := FALSE);
+			Making_Toast := TRUE;
 		END_IF
 END_CASE]]></ST>
     </Implementation>
@@ -51,6 +52,7 @@ END_CASE]]></ST>
       <LineId Id="29" Count="0" />
       <LineId Id="38" Count="1" />
       <LineId Id="50" Count="0" />
+      <LineId Id="65" Count="0" />
       <LineId Id="40" Count="0" />
       <LineId Id="11" Count="0" />
     </LineIds>

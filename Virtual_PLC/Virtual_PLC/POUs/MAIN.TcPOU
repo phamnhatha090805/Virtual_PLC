@@ -9,12 +9,15 @@ END_VAR
     <Implementation>
       <ST><![CDATA[Making_Coffee(Grinding := GVL.GrindButton, ToastState := GVL.ToastState, GetOffBed := GVL.Wakeup, HeatButton := GVL.HeatingUp, Start := GVL.ix_Start, CoffeeMakingState => GVL.CoffeeState);
 Making_Toast(LeverDown := GVL.LeverButton, BreadInserted := GVL.InsertedButton, CoffeeState := GVL.CoffeeState, MakingToastState => GVL.ToastState);
-]]></ST>
+IF Making_Coffee AND Making_Toast THEN
+	GVL.BreakfastReady := TRUE;
+END_IF]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="2" Count="0" />
       <LineId Id="7" Count="0" />
       <LineId Id="14" Count="0" />
+      <LineId Id="19" Count="1" />
     </LineIds>
   </POU>
 </TcPlcObject>

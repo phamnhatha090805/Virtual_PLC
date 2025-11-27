@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
-  <POU Name="Making_Toast" Id="{6d9288ca-62cb-465e-b746-9f270dfce14b}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION Making_Toast : BOOL
+  <POU Name="fbMaking_Toast" Id="{6e6da42b-0686-4a7b-b6de-b1bf9c898711}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbMaking_Toast
 VAR_INPUT
 	CoffeeState : INT;
 	BreadInserted : BOOL;
@@ -15,7 +15,8 @@ VAR
 END_VAR
 VAR_OUTPUT
 	MakingToastState : INT;
-END_VAR]]></Declaration>
+END_VAR
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[CASE step OF
 	0 : //Idle
@@ -41,20 +42,9 @@ END_VAR]]></Declaration>
 		END_IF
 END_CASE]]></ST>
     </Implementation>
-    <LineIds Name="Making_Toast">
-      <LineId Id="7" Count="0" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="20" Count="4" />
-      <LineId Id="26" Count="2" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="43" Count="2" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="38" Count="1" />
-      <LineId Id="50" Count="0" />
-      <LineId Id="65" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="11" Count="0" />
+    <LineIds Name="fbMaking_Toast">
+      <LineId Id="23" Count="21" />
+      <LineId Id="9" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

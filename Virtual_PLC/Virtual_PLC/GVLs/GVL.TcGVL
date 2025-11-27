@@ -10,6 +10,7 @@ VAR_GLOBAL
 	WakeUp : BOOL;
 	CoffeeState : INT;
 	GrindButton : BOOL;
+	CoffeeDone : BOOL;
 
     (* Breakfast process *)
 	InsertedButton : BOOL;

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="fbMaking_Coffee" Id="{6047ca55-2973-4800-b3c8-5ac6eb292b6c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbMaking_Coffee
+VAR_INPUT
+	GetOffBed : BOOL;
+	HeatButton : BOOL;
+	Start : BOOL;
+	ToastState : INT;
+	Grinding : BOOL;
+END_VAR
+VAR_OUTPUT
+	WaterHeating : BOOL;
+	CoffeeMakingState : INT;
+END_VAR
+VAR
+	step: INT;
+	WaterHot : BOOL;
+	TimerON : TON;
+	Brewing : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE step OF
+	0 : // Idle	
+		IF GetOffBed = TRUE AND Start THEN
+			step := 10;
+		END_IF
+	10: // Start heating up the water
+		IF HeatButton = TRUE THEN
+			CoffeeMakingState := 1;
+			TimerON(IN := TRUE, PT := T#5S);
+		END_IF
+		WaterHot := TimerON.Q;
+		IF WaterHot = TRUE THEN
+			step := 20;
+			TimerON(IN := FALSE);
+		END_IF
+	20 : // Grind the coffee beans
+		IF ToastState = 1 AND Grinding THEN
+			CoffeeMakingState := 2;
+			TimerON(IN := TRUE, PT := T#5S);
+		END_IF
+		IF TimerON.Q THEN
+			step := 30;
+			TimerON(IN := FALSE);
+		END_IF
+	30 : //Brewing the coffee
+		IF ToastState = 2 THEN
+			Brewing := TRUE;
+			CoffeeMakingState := 3;
+		END_IF
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="fbMaking_Coffee">
+      <LineId Id="26" Count="28" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

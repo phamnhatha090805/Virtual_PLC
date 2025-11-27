@@ -3,21 +3,17 @@
   <POU Name="MAIN" Id="{4f5b4da9-0ef4-4686-bbe2-392a45f36b5e}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	
+	MakingCoffee : fbMaking_Coffee;
+	MakingToast : fbMaking_Toast;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[Making_Coffee(Grinding := GVL.GrindButton, ToastState := GVL.ToastState, GetOffBed := GVL.Wakeup, HeatButton := GVL.HeatingUp, Start := GVL.ix_Start, CoffeeMakingState => GVL.CoffeeState);
-Making_Toast(LeverDown := GVL.LeverButton, BreadInserted := GVL.InsertedButton, CoffeeState := GVL.CoffeeState, MakingToastState => GVL.ToastState);
-IF Making_Coffee AND Making_Toast THEN
-	GVL.BreakfastReady := TRUE;
-END_IF]]></ST>
+      <ST><![CDATA[MakingCoffee(Grinding := GVL.GrindButton, ToastState := GVL.ToastState, GetOffBed := GVL.Wakeup, HeatButton := GVL.HeatingUp, Start := GVL.ix_Start, CoffeeMakingState => GVL.CoffeeState);
+MakingToast(LeverDown := GVL.LeverButton, BreadInserted := GVL.InsertedButton, CoffeeState := GVL.CoffeeState, MakingToastState => GVL.ToastState);]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="2" Count="0" />
       <LineId Id="7" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="19" Count="1" />
     </LineIds>
   </POU>
 </TcPlcObject>

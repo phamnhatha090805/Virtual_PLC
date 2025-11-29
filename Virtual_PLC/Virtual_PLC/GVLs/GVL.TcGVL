@@ -10,16 +10,23 @@ VAR_GLOBAL
 	ix_HeatingUp : BOOL;   // This is to simulate the heating button to heat up the water
 	CoffeeState : INT;   // This is to track the state of the making coffee
 	ix_GrindButton : BOOL;   // This is to simulate the grinding button of making coffee
+	ix_Brewing : BOOL;   // This is to simulate the brewing
 	ox_CoffeeDone : BOOL;   // This is to tell the coffee is ready
+	ox_BrewingDone : BOOL;   // This is to tell brewing is done
+	ox_GrindingDone : BOOL;   // This is to tell grinding is done
+	WaterHot : BOOL;   // To show if the water is hot
+	CoffeeWaitingTime : BOOL;   // To show when need to wait the water hot/grinding
 
     (* Breakfast process *)
 	ix_InsertedButton : BOOL;   // This is to simulate the inserting bread
 	ix_LeverButton : BOOL;   // This is to simulate the lever of the bread making machine
 	ToastState : INT;   // This is to track the state of the making toast
 	ox_ToastDone : BOOL;   // This is to tell the toast is ready
+	ToastWaitingTime : BOOL;
 
     (* Status signals *)
     BreakfastReady : BOOL;   // This is the output boolean say breakfast is done
+	Reset : BOOL;   // This is to reset all the state to 0
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

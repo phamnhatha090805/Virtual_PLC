@@ -21,6 +21,16 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"532"</v>
+              <v n="TextDefault">"Brewing"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"420"</v>
+              <v n="TextDefault">"Brewing Done"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"250"</v>
               <v n="TextDefault">"Coffee Ready"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -28,6 +38,11 @@
             <o>
               <v n="TextID">"997"</v>
               <v n="TextDefault">"Grind Coffee"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"936"</v>
+              <v n="TextDefault">"GrindingDone"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -61,6 +76,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"781"</v>
+              <v n="TextDefault">"Reset"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"336"</v>
               <v n="TextDefault">"Start Coffee"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -71,8 +91,18 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"127"</v>
+              <v n="TextDefault">"Wait 5s"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"714"</v>
               <v n="TextDefault">"Wake Up"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"15"</v>
+              <v n="TextDefault">"Water Hot"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
           </l>

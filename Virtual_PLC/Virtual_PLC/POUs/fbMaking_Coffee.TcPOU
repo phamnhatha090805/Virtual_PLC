@@ -3,26 +3,47 @@
   <POU Name="fbMaking_Coffee" Id="{6047ca55-2973-4800-b3c8-5ac6eb292b6c}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK fbMaking_Coffee
 VAR_INPUT
-	GetOffBed : BOOL;
+	GetOffBed : BOOL;  
 	HeatButton : BOOL;
 	Start : BOOL;
 	ToastState : INT;
 	Grinding : BOOL;
+	Brewing : BOOL;
+	Reset : BOOL;
 END_VAR
 VAR_OUTPUT
-	WaterHeating : BOOL;
+	WaterHotReady : BOOL;
+	GrindingReady : BOOL;
+	CoffeeWaitTime : BOOL;
 	CoffeeMakingState : INT;
+	CoffeeReady : BOOL;
+	BrewingReady : BOOL;
 END_VAR
 VAR
-	step: INT;
 	WaterHot : BOOL;
-	TimerON : TON;
-	Brewing : BOOL;
+	GrindingDone : BOOL;
+	BrewingDone : BOOL;
+	step: INT;
+	TimerON : TON;   // Delay and creating wait time
 	HeatingUp : BOOL;
+	StartGrinding : BOOL;
+	StartBrewing : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CASE step OF
+      <ST><![CDATA[IF Reset THEN
+	step := 0;
+END_IF
+CASE step OF
 	0 : // Idle	
+		WaterHot := FALSE;
+		GrindingDone := FALSE;
+		CoffeeWaitTime := FALSE;
+		CoffeeReady := FALSE;
+		BrewingDone := FALSE;
+		CoffeeMakingState := 0;
+		HeatButton := FALSE;
+		Grinding := FALSE;
+		Brewing := FALSE;
 		IF GetOffBed = TRUE AND Start THEN
 			step := 10;
 		END_IF
@@ -30,35 +51,81 @@ END_VAR]]></Declaration>
 		IF HeatButton = TRUE THEN
 			CoffeeMakingState := 1;
 			HeatingUp := TRUE;
+			CoffeeWaitTime := TRUE;   // Send a signal say need to wait 5s
 		END_IF
-		TimerON(IN := HeatingUp, PT := T#5S);
+		TimerON(IN := HeatingUp, PT := T#5S);   // Waiting the water being heated for 5s
 		WaterHot := TimerON.Q;
-		IF WaterHot = TRUE THEN
+		IF WaterHot THEN
+			WaterHotReady := TRUE;
+			HeatingUp := FALSE;
+			CoffeeWaitTime := FALSE;   // Reset waiting signal
 			step := 20;
-			TimerON(IN := FALSE);
+			TimerON(IN := FALSE);   // Reset Timer
 		END_IF
 	20 : // Grind the coffee beans
-		IF ToastState = 1 AND Grinding THEN
+		IF (ToastState = 1 OR ToastState = 2) AND Grinding THEN
 			CoffeeMakingState := 2;
-			TimerON(IN := TRUE, PT := T#5S);
+			CoffeeWaitTime := TRUE;   // Send a signal say need to wait 5s
+			StartGrinding := TRUE;
 		END_IF
-		IF TimerON.Q THEN
+		TimerON(IN := StartGrinding, PT := T#5S);
+		GrindingDone := TimerON.Q;
+		IF GrindingDone THEN
+			GrindingReady := TRUE;
+			StartGrinding := FALSE;
+			CoffeeWaitTime := FALSE;   // Reset waiting signal
 			step := 30;
-			TimerON(IN := FALSE);
+			TimerON(IN := FALSE);   // // Reset Timer
 		END_IF
 	30 : //Brewing the coffee
-		IF ToastState = 2 THEN
-			Brewing := TRUE;
+		IF ToastState = 2 AND Brewing THEN
+			StartBrewing := TRUE;
+			CoffeeWaitTime := TRUE;
 			CoffeeMakingState := 3;
+		END_IF
+		TimerON(IN := StartBrewing, PT := T#5S);
+		BrewingDone := TimerON.Q;
+		IF BrewingDone THEN
+			BrewingReady := TRUE;
+			StartBrewing := FALSE;
+			CoffeeWaitTime := FALSE;   // Reset waiting signal
+			CoffeeReady := TRUE;
+			TimerON(IN := FALSE);   // // Reset Timer
 		END_IF
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="fbMaking_Coffee">
-      <LineId Id="26" Count="7" />
+      <LineId Id="119" Count="1" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="26" Count="1" />
+      <LineId Id="121" Count="8" />
+      <LineId Id="28" Count="5" />
       <LineId Id="74" Count="0" />
+      <LineId Id="96" Count="0" />
       <LineId Id="35" Count="0" />
       <LineId Id="75" Count="0" />
-      <LineId Id="36" Count="18" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="136" Count="0" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="38" Count="5" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="138" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="47" Count="5" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="53" Count="1" />
+      <LineId Id="111" Count="2" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="114" Count="2" />
+      <LineId Id="110" Count="0" />
       <LineId Id="9" Count="0" />
     </LineIds>
   </POU>

@@ -6,44 +6,63 @@ VAR_INPUT
 	CoffeeState : INT;
 	BreadInserted : BOOL;
 	LeverDown : BOOL;
+	Reset : BOOL;
 END_VAR
 VAR
 	step : INT;
 	Toasting : BOOL;
 	TimerON : TON;
-	JamDetected: BOOL;
+	ToastingDone : BOOL;
 END_VAR
 VAR_OUTPUT
 	MakingToastState : INT;
+	ToastWaitTime : BOOL;
+	ToastReady : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CASE step OF
+      <ST><![CDATA[IF Reset THEN
+	step := 0;
+END_IF
+CASE step OF
 	0 : //Idle
+		ToastingDone := FALSE;
+		ToastWaitTime := FALSE;
+		LeverDown := FALSE;
 		IF BreadInserted AND CoffeeState = 1 THEN
 			step := 10;
 		END_IF
 	10 : // Loading Bread
 		IF LeverDown THEN
-			step := 20;
-		END_IF
-	20 : //Toasting
-		IF JamDetected THEN
-			step := 0;
-		ELSIF NOT JamDetected THEN
 			Toasting := TRUE;
+			ToastWaitTime := TRUE;   // Represent that toast need to wait 5s
 			MakingToastState := 1;
 		END_IF
 		TimerON(IN := Toasting, PT := T#5S);
-		IF TimerON.Q THEN
+		ToastingDone := TimerON.Q;
+		IF ToastingDone THEN
+			ToastReady := TRUE;
+			Toasting := FALSE;
+			ToastWaitTime := FALSE;   // Reset the representation of waiting
 			MakingToastState := 2;
 			TimerON(IN := FALSE);
 		END_IF
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="fbMaking_Toast">
-      <LineId Id="23" Count="19" />
-      <LineId Id="44" Count="0" />
+      <LineId Id="66" Count="2" />
+      <LineId Id="23" Count="1" />
+      <LineId Id="82" Count="1" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="25" Count="4" />
+      <LineId Id="79" Count="2" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="73" Count="2" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="76" Count="1" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="78" Count="0" />
       <LineId Id="9" Count="0" />
     </LineIds>
   </POU>

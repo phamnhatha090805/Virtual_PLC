@@ -8,8 +8,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[MakingCoffee(Grinding := GVL.ix_GrindButton, ToastState := GVL.ToastState, GetOffBed := GVL.ix_Wakeup, HeatButton := GVL.ix_HeatingUp, Start := GVL.ix_Start, CoffeeMakingState => GVL.CoffeeState);
-MakingToast(LeverDown := GVL.ix_LeverButton, BreadInserted := GVL.ix_InsertedButton, CoffeeState := GVL.CoffeeState, MakingToastState => GVL.ToastState);
+      <ST><![CDATA[MakingCoffee(Reset := GVL.Reset, Grinding := GVL.ix_GrindButton, ToastState := GVL.ToastState, GetOffBed := GVL.ix_Wakeup, HeatButton := GVL.ix_HeatingUp, Start := GVL.ix_Start, Brewing := GVL.ix_Brewing, CoffeeMakingState => GVL.CoffeeState, WaterHotReady => GVL.WaterHot, CoffeeWaitTime => GVL.CoffeeWaitingTime, CoffeeReady => GVL.ox_CoffeeDone, BrewingReady => GVL.ox_BrewingDone, GrindingReady => GVL.ox_GrindingDone);
+MakingToast(Reset := GVL.Reset, LeverDown := GVL.ix_LeverButton, BreadInserted := GVL.ix_InsertedButton, CoffeeState := GVL.CoffeeState, MakingToastState => GVL.ToastState, ToastWaitTime => GVL.ToastWaitingTime, ToastReady => GVL.ox_ToastDone);
 
 IF GVL.ox_CoffeeDone AND GVL.ox_ToastDone THEN
 	GVL.BreakfastReady := TRUE;  // The breakfast is fully ready when both coffee and toast are done

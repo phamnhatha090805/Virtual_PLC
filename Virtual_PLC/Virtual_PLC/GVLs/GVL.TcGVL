@@ -5,20 +5,21 @@
 VAR_GLOBAL
 
     (* Coffee process *)
-	HeatingUp : BOOL;
-	ix_Start : BOOL;
-	WakeUp : BOOL;
-	CoffeeState : INT;
-	GrindButton : BOOL;
-	CoffeeDone : BOOL;
+	ix_Start : BOOL;   // To start the making coffee process
+	ix_WakeUp : BOOL;   // This is to simulate the waking up
+	ix_HeatingUp : BOOL;   // This is to simulate the heating button to heat up the water
+	CoffeeState : INT;   // This is to track the state of the making coffee
+	ix_GrindButton : BOOL;   // This is to simulate the grinding button of making coffee
+	ox_CoffeeDone : BOOL;   // This is to tell the coffee is ready
 
     (* Breakfast process *)
-	InsertedButton : BOOL;
-	LeverButton : BOOL;
-	ToastState : INT;
+	ix_InsertedButton : BOOL;   // This is to simulate the inserting bread
+	ix_LeverButton : BOOL;   // This is to simulate the lever of the bread making machine
+	ToastState : INT;   // This is to track the state of the making toast
+	ox_ToastDone : BOOL;   // This is to tell the toast is ready
 
     (* Status signals *)
-    BreakfastReady : BOOL;
+    BreakfastReady : BOOL;   // This is the output boolean say breakfast is done
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

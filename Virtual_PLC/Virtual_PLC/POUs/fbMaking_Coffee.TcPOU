@@ -18,6 +18,7 @@ VAR
 	WaterHot : BOOL;
 	TimerON : TON;
 	Brewing : BOOL;
+	HeatingUp : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[CASE step OF
@@ -28,8 +29,9 @@ END_VAR]]></Declaration>
 	10: // Start heating up the water
 		IF HeatButton = TRUE THEN
 			CoffeeMakingState := 1;
-			TimerON(IN := TRUE, PT := T#5S);
+			HeatingUp := TRUE;
 		END_IF
+		TimerON(IN := HeatingUp, PT := T#5S);
 		WaterHot := TimerON.Q;
 		IF WaterHot = TRUE THEN
 			step := 20;
@@ -52,7 +54,11 @@ END_VAR]]></Declaration>
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="fbMaking_Coffee">
-      <LineId Id="26" Count="28" />
+      <LineId Id="26" Count="7" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="36" Count="18" />
       <LineId Id="9" Count="0" />
     </LineIds>
   </POU>

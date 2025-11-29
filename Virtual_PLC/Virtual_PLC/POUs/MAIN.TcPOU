@@ -8,12 +8,19 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[MakingCoffee(Grinding := GVL.GrindButton, ToastState := GVL.ToastState, GetOffBed := GVL.Wakeup, HeatButton := GVL.HeatingUp, Start := GVL.ix_Start, CoffeeMakingState => GVL.CoffeeState);
-MakingToast(LeverDown := GVL.LeverButton, BreadInserted := GVL.InsertedButton, CoffeeState := GVL.CoffeeState, MakingToastState => GVL.ToastState);]]></ST>
+      <ST><![CDATA[MakingCoffee(Grinding := GVL.ix_GrindButton, ToastState := GVL.ToastState, GetOffBed := GVL.ix_Wakeup, HeatButton := GVL.ix_HeatingUp, Start := GVL.ix_Start, CoffeeMakingState => GVL.CoffeeState);
+MakingToast(LeverDown := GVL.ix_LeverButton, BreadInserted := GVL.ix_InsertedButton, CoffeeState := GVL.CoffeeState, MakingToastState => GVL.ToastState);
+
+IF GVL.ox_CoffeeDone AND GVL.ox_ToastDone THEN
+	GVL.BreakfastReady := TRUE;  // The breakfast is fully ready when both coffee and toast are done
+END_IF]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="2" Count="0" />
       <LineId Id="7" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="15" Count="1" />
     </LineIds>
   </POU>
 </TcPlcObject>

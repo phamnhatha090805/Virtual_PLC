@@ -38,12 +38,12 @@ END_VAR
 		IF TimerON.Q THEN
 			MakingToastState := 2;
 			TimerON(IN := FALSE);
-			Making_Toast := TRUE;
 		END_IF
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="fbMaking_Toast">
-      <LineId Id="23" Count="21" />
+      <LineId Id="23" Count="19" />
+      <LineId Id="44" Count="0" />
       <LineId Id="9" Count="0" />
     </LineIds>
   </POU>

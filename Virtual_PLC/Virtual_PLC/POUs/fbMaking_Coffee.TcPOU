@@ -88,7 +88,7 @@ CASE step OF
 		END_IF
 	30 : //Brewing the coffee
 		IF WaterError AND Brewing THEN
-			WaterLevelError := TRUE;
+			step := 40;
 		ELSIF ToastState = 2 AND Brewing AND NOT WaterError THEN
 			StartBrewing := TRUE;
 			CoffeeWaitTime := TRUE;
@@ -103,6 +103,9 @@ CASE step OF
 			CoffeeReady := TRUE;
 			TimerON(IN := FALSE);   // // Reset Timer
 		END_IF
+		
+	40 : // Error state
+		WaterLevelError := TRUE;
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="fbMaking_Coffee">
@@ -136,7 +139,7 @@ END_CASE]]></ST>
       <LineId Id="102" Count="0" />
       <LineId Id="47" Count="3" />
       <LineId Id="169" Count="0" />
-      <LineId Id="172" Count="0" />
+      <LineId Id="213" Count="0" />
       <LineId Id="51" Count="1" />
       <LineId Id="133" Count="0" />
       <LineId Id="53" Count="1" />
@@ -145,6 +148,8 @@ END_CASE]]></ST>
       <LineId Id="130" Count="0" />
       <LineId Id="114" Count="2" />
       <LineId Id="110" Count="0" />
+      <LineId Id="214" Count="1" />
+      <LineId Id="218" Count="0" />
       <LineId Id="9" Count="0" />
     </LineIds>
   </POU>

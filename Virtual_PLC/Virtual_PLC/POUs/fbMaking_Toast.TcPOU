@@ -48,7 +48,7 @@ CASE step OF
 			ToastWaitTime := TRUE;   // Represent that toast need to wait 5s
 			MakingToastState := 1;
 		ELSIF LeverDown AND ToastError THEN
-			ToastJam := TRUE;
+			step := 20;
 		END_IF
 		TimerON(IN := Toasting, PT := T#5S);
 		ToastingDone := TimerON.Q;
@@ -59,6 +59,8 @@ CASE step OF
 			MakingToastState := 2;
 			TimerON(IN := FALSE);
 		END_IF
+	20 : // Error state
+		ToastJam := TRUE;
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="fbMaking_Toast">
@@ -73,7 +75,7 @@ END_CASE]]></ST>
       <LineId Id="25" Count="4" />
       <LineId Id="79" Count="2" />
       <LineId Id="108" Count="0" />
-      <LineId Id="110" Count="0" />
+      <LineId Id="142" Count="0" />
       <LineId Id="31" Count="0" />
       <LineId Id="73" Count="2" />
       <LineId Id="88" Count="0" />
@@ -81,6 +83,7 @@ END_CASE]]></ST>
       <LineId Id="76" Count="1" />
       <LineId Id="69" Count="0" />
       <LineId Id="78" Count="0" />
+      <LineId Id="143" Count="1" />
       <LineId Id="9" Count="0" />
     </LineIds>
   </POU>

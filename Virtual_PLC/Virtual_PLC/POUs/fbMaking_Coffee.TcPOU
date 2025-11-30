@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
   <POU Name="fbMaking_Coffee" Id="{6047ca55-2973-4800-b3c8-5ac6eb292b6c}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK fbMaking_Coffee
+    <Declaration><![CDATA[(* Name: Nhat Ha Pham
+   Student number: 547508*)
+
+FUNCTION_BLOCK fbMaking_Coffee
 VAR_INPUT
 	GetOffBed : BOOL;  
 	HeatButton : BOOL;
@@ -10,6 +13,7 @@ VAR_INPUT
 	Grinding : BOOL;
 	Brewing : BOOL;
 	Reset : BOOL;
+	WaterError : BOOL;
 END_VAR
 VAR_OUTPUT
 	WaterHotReady : BOOL;
@@ -18,6 +22,7 @@ VAR_OUTPUT
 	CoffeeMakingState : INT;
 	CoffeeReady : BOOL;
 	BrewingReady : BOOL;
+	WaterLevelError : BOOL;
 END_VAR
 VAR
 	WaterHot : BOOL;
@@ -30,20 +35,24 @@ VAR
 	StartBrewing : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF Reset THEN
+      <ST><![CDATA[(* Name: Nhat Ha Pham
+   Student number: 547508*)
+
+IF Reset THEN
 	step := 0;
 END_IF
 CASE step OF
 	0 : // Idle	
-		WaterHot := FALSE;
-		GrindingDone := FALSE;
+		WaterHotReady := FALSE;
+		GrindingReady := FALSE;
 		CoffeeWaitTime := FALSE;
 		CoffeeReady := FALSE;
-		BrewingDone := FALSE;
+		BrewingReady := FALSE;
 		CoffeeMakingState := 0;
 		HeatButton := FALSE;
 		Grinding := FALSE;
 		Brewing := FALSE;
+		WaterLevelError := FALSE;
 		IF GetOffBed = TRUE AND Start THEN
 			step := 10;
 		END_IF
@@ -78,7 +87,9 @@ CASE step OF
 			TimerON(IN := FALSE);   // // Reset Timer
 		END_IF
 	30 : //Brewing the coffee
-		IF ToastState = 2 AND Brewing THEN
+		IF WaterError AND Brewing THEN
+			WaterLevelError := TRUE;
+		ELSIF ToastState = 2 AND Brewing AND NOT WaterError THEN
 			StartBrewing := TRUE;
 			CoffeeWaitTime := TRUE;
 			CoffeeMakingState := 3;
@@ -95,10 +106,15 @@ CASE step OF
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="fbMaking_Coffee">
-      <LineId Id="119" Count="1" />
+      <LineId Id="178" Count="0" />
+      <LineId Id="119" Count="0" />
+      <LineId Id="180" Count="0" />
+      <LineId Id="179" Count="0" />
+      <LineId Id="120" Count="0" />
       <LineId Id="118" Count="0" />
       <LineId Id="26" Count="1" />
       <LineId Id="121" Count="8" />
+      <LineId Id="174" Count="0" />
       <LineId Id="28" Count="5" />
       <LineId Id="74" Count="0" />
       <LineId Id="96" Count="0" />
@@ -118,7 +134,10 @@ END_CASE]]></ST>
       <LineId Id="138" Count="0" />
       <LineId Id="131" Count="0" />
       <LineId Id="102" Count="0" />
-      <LineId Id="47" Count="5" />
+      <LineId Id="47" Count="3" />
+      <LineId Id="169" Count="0" />
+      <LineId Id="172" Count="0" />
+      <LineId Id="51" Count="1" />
       <LineId Id="133" Count="0" />
       <LineId Id="53" Count="1" />
       <LineId Id="111" Count="2" />

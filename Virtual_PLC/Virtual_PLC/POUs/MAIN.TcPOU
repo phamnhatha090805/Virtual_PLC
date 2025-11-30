@@ -1,26 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
   <POU Name="MAIN" Id="{4f5b4da9-0ef4-4686-bbe2-392a45f36b5e}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM MAIN
+    <Declaration><![CDATA[(* Name: Nhat Ha Pham
+   Student number: 547508*)
+
+PROGRAM MAIN
 VAR
 	MakingCoffee : fbMaking_Coffee;
 	MakingToast : fbMaking_Toast;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[MakingCoffee(Reset := GVL.Reset, Grinding := GVL.ix_GrindButton, ToastState := GVL.ToastState, GetOffBed := GVL.ix_Wakeup, HeatButton := GVL.ix_HeatingUp, Start := GVL.ix_Start, Brewing := GVL.ix_Brewing, CoffeeMakingState => GVL.CoffeeState, WaterHotReady => GVL.WaterHot, CoffeeWaitTime => GVL.CoffeeWaitingTime, CoffeeReady => GVL.ox_CoffeeDone, BrewingReady => GVL.ox_BrewingDone, GrindingReady => GVL.ox_GrindingDone);
-MakingToast(Reset := GVL.Reset, LeverDown := GVL.ix_LeverButton, BreadInserted := GVL.ix_InsertedButton, CoffeeState := GVL.CoffeeState, MakingToastState => GVL.ToastState, ToastWaitTime => GVL.ToastWaitingTime, ToastReady => GVL.ox_ToastDone);
+      <ST><![CDATA[(* Name: Nhat Ha Pham
+   Student number: 547508*)
+
+MakingCoffee(Reset := GVL.Reset, Grinding := GVL.ix_GrindButton, ToastState := GVL.ToastState, GetOffBed := GVL.ix_Wakeup, HeatButton := GVL.ix_HeatingUp, Start := GVL.ix_Start, Brewing := GVL.ix_Brewing, WaterError := GVL.ix_WaterError, CoffeeMakingState => GVL.CoffeeState, WaterHotReady => GVL.WaterHot, CoffeeWaitTime => GVL.CoffeeWaitingTime, CoffeeReady => GVL.ox_CoffeeDone, BrewingReady => GVL.ox_BrewingDone, GrindingReady => GVL.ox_GrindingDone, WaterLevelError => GVL.ox_WaterError);
+MakingToast(Reset := GVL.Reset, LeverDown := GVL.ix_LeverButton, BreadInserted := GVL.ix_InsertedButton, CoffeeState := GVL.CoffeeState, ToastError := GVL.ix_ToastError, MakingToastState => GVL.ToastState, ToastWaitTime => GVL.ToastWaitingTime, ToastReady => GVL.ox_ToastDone, ToastJam => GVL.ox_ToastError);
 
 IF GVL.ox_CoffeeDone AND GVL.ox_ToastDone THEN
 	GVL.BreakfastReady := TRUE;  // The breakfast is fully ready when both coffee and toast are done
+ELSIF GVL.Reset THEN
+	GVL.BreakfastReady := FALSE;   // This is to reset the breakfast routine
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
+      <LineId Id="29" Count="0" />
+      <LineId Id="27" Count="1" />
       <LineId Id="2" Count="0" />
       <LineId Id="7" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="13" Count="0" />
-      <LineId Id="15" Count="1" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="16" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

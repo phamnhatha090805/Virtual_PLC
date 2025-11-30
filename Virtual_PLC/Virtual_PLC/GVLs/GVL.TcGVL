@@ -2,27 +2,34 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
   <GVL Name="GVL" Id="{283fb4ab-a692-42a4-99f7-db60d092ad03}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
+(* Name: Nhat Ha Pham
+   Student number: 547508*)
+
 VAR_GLOBAL
 
     (* Coffee process *)
 	ix_Start : BOOL;   // To start the making coffee process
 	ix_WakeUp : BOOL;   // This is to simulate the waking up
 	ix_HeatingUp : BOOL;   // This is to simulate the heating button to heat up the water
+	ix_WaterError : BOOL;   // This is to simulate the water error
 	CoffeeState : INT;   // This is to track the state of the making coffee
 	ix_GrindButton : BOOL;   // This is to simulate the grinding button of making coffee
 	ix_Brewing : BOOL;   // This is to simulate the brewing
 	ox_CoffeeDone : BOOL;   // This is to tell the coffee is ready
 	ox_BrewingDone : BOOL;   // This is to tell brewing is done
 	ox_GrindingDone : BOOL;   // This is to tell grinding is done
+	ox_WaterError : BOOL;   // This is to represent the water error
 	WaterHot : BOOL;   // To show if the water is hot
 	CoffeeWaitingTime : BOOL;   // To show when need to wait the water hot/grinding
 
     (* Breakfast process *)
 	ix_InsertedButton : BOOL;   // This is to simulate the inserting bread
 	ix_LeverButton : BOOL;   // This is to simulate the lever of the bread making machine
+	ix_ToastError : BOOL;   // This is to simulate the toasting error
 	ToastState : INT;   // This is to track the state of the making toast
 	ox_ToastDone : BOOL;   // This is to tell the toast is ready
 	ToastWaitingTime : BOOL;
+	ox_ToastError : BOOL;   // This is to represent the error of the toasting process
 
     (* Status signals *)
     BreakfastReady : BOOL;   // This is the output boolean say breakfast is done

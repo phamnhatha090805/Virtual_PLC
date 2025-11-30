@@ -1,12 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
   <POU Name="fbMaking_Toast" Id="{6e6da42b-0686-4a7b-b6de-b1bf9c898711}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK fbMaking_Toast
+    <Declaration><![CDATA[(* Name: Nhat Ha Pham
+   Student number: 547508*)
+   
+FUNCTION_BLOCK fbMaking_Toast
 VAR_INPUT
 	CoffeeState : INT;
 	BreadInserted : BOOL;
 	LeverDown : BOOL;
 	Reset : BOOL;
+	ToastError : BOOL;
 END_VAR
 VAR
 	step : INT;
@@ -18,25 +22,33 @@ VAR_OUTPUT
 	MakingToastState : INT;
 	ToastWaitTime : BOOL;
 	ToastReady : BOOL;
+	ToastJam : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF Reset THEN
+      <ST><![CDATA[(* Name: Nhat Ha Pham
+   Student number: 547508*)
+
+IF Reset THEN
 	step := 0;
 END_IF
 CASE step OF
 	0 : //Idle
-		ToastingDone := FALSE;
+		ToastReady := FALSE;
 		ToastWaitTime := FALSE;
 		LeverDown := FALSE;
+		MakingToastState := 0;
+		ToastJam := FALSE;
 		IF BreadInserted AND CoffeeState = 1 THEN
 			step := 10;
 		END_IF
 	10 : // Loading Bread
-		IF LeverDown THEN
+		IF LeverDown AND NOT ToastError THEN
 			Toasting := TRUE;
 			ToastWaitTime := TRUE;   // Represent that toast need to wait 5s
 			MakingToastState := 1;
+		ELSIF LeverDown AND ToastError THEN
+			ToastJam := TRUE;
 		END_IF
 		TimerON(IN := Toasting, PT := T#5S);
 		ToastingDone := TimerON.Q;
@@ -50,12 +62,18 @@ CASE step OF
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="fbMaking_Toast">
+      <LineId Id="118" Count="0" />
+      <LineId Id="116" Count="1" />
       <LineId Id="66" Count="2" />
       <LineId Id="23" Count="1" />
       <LineId Id="82" Count="1" />
       <LineId Id="85" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="112" Count="0" />
       <LineId Id="25" Count="4" />
       <LineId Id="79" Count="2" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="110" Count="0" />
       <LineId Id="31" Count="0" />
       <LineId Id="73" Count="2" />
       <LineId Id="88" Count="0" />
